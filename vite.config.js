@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
+  },
+  optimizeDeps: {
+    include: ["jwt-decode"],
   }
 })
