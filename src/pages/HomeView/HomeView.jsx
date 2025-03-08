@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import './HomeView.css';
+import Header from '../../components/Header/Header';
 
 function HomeView() {
   return (
     <div>
-      HomeView
-      <Link to="/login">Conectarse</Link>
-      <Link to="/signup">Registro</Link>
+      <Header />
     </div>
   )
 }
