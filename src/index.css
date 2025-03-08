@@ -1,6 +1,32 @@
 :root {
+
+  --color-black: #181717;
+  --color-white: #fafafa;
+  --font-raleway: "Raleway", sans-serif;
+  --font-lora: "Lora", serif;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-raleway);
+  font-weight: normal;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+p, span, a, li, div, section, article {
+  font-family: var(--font-lora);
+  font-weight: normal;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
