@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { useAuth } from '../../context/auth.context';
 import { login } from '../../services/auth';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './LoginView.css';
 
 function LoginView() {
@@ -11,7 +11,7 @@ function LoginView() {
   const { setAuthToken } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     try {
@@ -27,10 +27,10 @@ function LoginView() {
 
         if(decoded.role === "admin") {
           console.log("Bienvenido, admin");
-          // navigate("/admin");
+          navigate("/admin");
         } else {
           console.log("Bienvenido, usuario");
-          // navigate("/profile");
+          navigate("/profile");
         }
       } else {
         console.error("Login failed", data);
