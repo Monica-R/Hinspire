@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signup } from '../../services/auth';
 import { useAuth } from '../../context/auth.context';
 import './SignupView.css';
@@ -10,6 +11,7 @@ function SignupView() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     try {
@@ -19,7 +21,7 @@ function SignupView() {
 
       if (data && data.authToken) {
         setAuthToken(data.authToken);
-        // navigate("/profile")
+        navigate("/profile");
       }
     } catch (error) {
       console.error(error);
