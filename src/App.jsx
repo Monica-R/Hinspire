@@ -7,6 +7,10 @@ import HomeView from './pages/HomeView/HomeView'
 import ProfileView from './pages/ProfileView/ProfileView'
 import Admin from './pages/Admin/Admin'
 import NotFound from './pages/NotFound/NotFound'
+import AllStoriesView from './pages/AllStoriesView/AllStoriesView'
+import MyStoriesView from './pages/MyStoriesView/MyStoriesView'
+import EditProfileView from './pages/EditProfileView/EditProfileView'
+import Layout from './layouts/Layout'
 
 function App() {
 
@@ -15,12 +19,17 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<HomeView />}/>
-            <Route path='/login' element={ <LoginView  /> }/>
-            <Route path='/signup' element={ <SignupView /> }/>
-            <Route path='/profile' element={ <ProfileView /> } />
-            <Route path='/admin' element={ <Admin /> } />
-            <Route path='*' element={<NotFound />} />
+            <Route path='/' element={ <Layout /> }>
+              <Route index element={ <HomeView /> } />
+              <Route path='/login' element={ <LoginView  /> }/>
+              <Route path='/signup' element={ <SignupView /> }/>
+              <Route path='/profile' element={ <ProfileView /> } />
+              <Route path='/admin' element={ <Admin /> } />
+              <Route path='/stories' element={ <AllStoriesView /> } />
+              <Route path='/stories/user' element={ <MyStoriesView /> } />
+              <Route path='/edit-profile' element={ <EditProfileView /> } />
+              <Route path='*' element={<NotFound />} />
+            </Route>
           </Routes>
         </BrowserRouter>
       </AuthProvider>
