@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useParams, useState } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import './StoryDetailsView.css';
 import FragmentsList from '../../components/FragmentsList/FragmentsList';
 import { getFragmentsOfStory } from '../../services/fragments';
