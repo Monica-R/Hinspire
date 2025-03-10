@@ -1,9 +1,12 @@
+import StoryList from '../../components/StoryList/StoryList';
 import './AllStoriesView.css';
 import React from 'react'
 
 function AllStoriesView() {
   return (
-    <div>AllStoriesView</div>
+    <section className='story-list'>
+      <StoryList />
+    </section>
   )
 }
 
