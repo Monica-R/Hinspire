@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../../services/auth';
 import { useAuth } from '../../context/auth.context';
@@ -7,11 +7,18 @@ import './SignupView.css';
 
 function SignupView() {
 
-  const { setAuthToken } = useAuth();
+  const { setAuthToken, user } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  // Redirigir después de login según qué tipo de usuario es
+  useEffect(() => {
+    if (user) {
+      navigate(user.role === "admin" ? "/admin" : "/profile");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (event) => {
     try {
@@ -21,13 +28,13 @@ function SignupView() {
 
       if (data && data.authToken) {
         setAuthToken(data.authToken);
-        navigate("/profile");
+      } else {
+        console.error("Signup failed", data);
       }
     } catch (error) {
       console.error(error);
     }
   }
-
 
   return (
     <div className='signup-layer'>
