@@ -19,3 +19,15 @@ export const login = async (user) => {
     throw new Error(error);
   }
 }
+
+export const verify = async (token) => {
+  try {
+    const response = await api.get("/auth/verify", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    return response.data;
+  } catch (error) {
+    console.error("Houston, we have a problem.", error);
+    throw new Error(error);
+  }
+}
