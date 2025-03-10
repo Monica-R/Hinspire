@@ -48,11 +48,15 @@ function ProfileView() {
       </section>
 
       <section className="profile-zone">
-        <Link to="/stories">Explore</Link>
-        <Link to="/stories/user">My Stories</Link>
-        <Link to="/edit-profile">Edit profile</Link>
+        <div className="navbar-options">          
+          <Link to="/stories">Explore</Link>
+          <Link to="/stories/user">My Stories</Link>
+          <Link to="/edit-profile">Edit profile</Link>
+        </div>
+        <article className="recent-stories">
+          <h2 className="recent-stories__h2">Recent stories</h2>
         {getStoriesDesc.length === 0 ? (
-          <p>No stories yet.</p>
+          <p className='recent-stories__p'>No stories yet.</p>
         ) : (
           <ul>
             {getStoriesDesc.slice(0, 5).map(story => (
@@ -62,6 +66,7 @@ function ProfileView() {
             ))}
           </ul>
         )}
+        </article>
       </section>
     </div>
   )
