@@ -1,8 +1,21 @@
 import React from 'react'
 
-function FragmentsList() {
+function FragmentsList({fragments}) {
+  console.info('fragments', fragments);
   return (
-    <div>FragmentsList</div>
+    <article className='acepted-fragments'>
+      { fragments.length > 0 ?
+        <div>
+          { fragments.map((fragment) => (
+            <div key={fragment._id}>
+              <p>{fragment.content}</p>
+              <p>{fragment.author.username}</p>
+            </div>
+          ))}
+        </div>
+        : <p>No fragments yet.</p>
+      }
+    </article>
   )
 }
 
