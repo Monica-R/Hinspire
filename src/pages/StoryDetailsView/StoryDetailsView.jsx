@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import './StoryDetailsView.css';
 import FragmentsList from '../../components/FragmentsList/FragmentsList';
-import { createFragment } from '../../services/fragments';
+import { createFragment, updateFragment, deleteFragment, acceptFragment } from '../../services/fragments';
 import { fetchStoryById } from '../../services/stories';
 import { getUserVotes, addVote, removeVote } from '../../services/votes';
 import { useAuth } from '../../context/auth.context';
 
 function StoryDetailsView() {
-    const { authToken } = useAuth();
+    const { authToken, user } = useAuth();
     const { id } = useParams();
     const [story, setStory] = useState({});
     const [content, setContent] = useState("");
@@ -16,7 +16,21 @@ function StoryDetailsView() {
 
     const pendingFragments = story.pendingFragments || [];
     const acceptedFragments = story.fragments || [];
-    
+
+      // Función para refrescar la historia
+    const refreshStory = useCallback(async () => {
+        try {
+            const data = await fetchStoryById(id);
+            setStory(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }, [id])
+
+    useEffect(() => {
+        refreshStory();
+    }, [refreshStory]);
+
     useEffect(() => {
         const fetchStory = async () => {
             try {
@@ -28,7 +42,7 @@ function StoryDetailsView() {
         };
         fetchStory();
     }
-    , [id]);
+        , [id]);
 
     useEffect(() => {
         const fetchUserVoted = async () => {
@@ -79,49 +93,96 @@ function StoryDetailsView() {
         }
     }
 
+    // Funciones para editar, eliminar y aceptar fragmentos
+    const handleEditFragment = async (fragmentId) => {
+        const newContent = prompt("Edit your fragment:");
+        if (!newContent) return;
+        try {
+            await updateFragment(fragmentId, newContent, authToken);
+            const data = await fetchStoryById(id);
+            setStory(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    // para editar, eliminar y aceptar fragmento
+    const handleDeleteFragment = async (fragmentId) => {
+        if (!window.confirm("Are you sure you want to delete this fragment?")) return;
+        try {
+            await deleteFragment(fragmentId, authToken);
+            const data = await fetchStoryById(id);
+            setStory(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleAcceptFragment = async (fragmentId) => {
+        try {
+            // Se asume que el endpoint acepta la historia ID y el fragment ID
+            await acceptFragment(id, fragmentId, authToken);
+            const data = await fetchStoryById(id);
+            setStory(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     if (!story) {
         return <p>Loading...</p>
     }
-  return (
-    <section className='story-section'>
-        <article className='content'>            
-            <h2 className='story-title'>{ story.title }</h2>
-            { story.author && <p className='story-author'>{ story.author.username }</p> }
-            <p className='story-content'>{ story.description }</p>
-        </article>
-        {
-            story.status !== 'completed' &&
-            pendingFragments.length < 3 &&
-            <form onSubmit={handleSubmit}>
-                <textarea name="content" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
-                <button type='submit'>Add fragment</button>
-            </form>
-        }
-        <article className='pending-fragments'>
-        {pendingFragments.length > 0 &&
-            <div style={{border: '1px solid red'}}>
-                <h3>Tenemos fragmentos en proceso, vota por el que te guste</h3>
-                { pendingFragments.map((fragment) => (
-                    <div key={fragment._id}>
-                        <span>{fragment.author.username}</span>
-                        <p>{fragment.content}</p>
-                        <button 
-                            disabled={votedFragments.includes(fragment._id)} 
-                            onClick={() => handleVote(fragment._id)
-                        }>Vote</button>
-                        <button
-                            disabled={!votedFragments.includes(fragment._id)}
-                            onClick={() => handleRemoveVote(fragment._id)}
-                        >Quitar voto</button>
-                        <span>{ fragment.votes }</span>
+    return (
+        <section className='story-section'>
+            <article className='content'>
+                <h2 className='story-title'>{story.title}</h2>
+                {story.author && <p className='story-author'>{story.author.username}</p>}
+                <p className='story-content'>{story.description}</p>
+            </article>
+            {
+                story.status !== 'completed' &&
+                pendingFragments.length < 3 &&
+                <form onSubmit={handleSubmit}>
+                    <textarea name="content" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
+                    <button type='submit'>Add fragment</button>
+                </form>
+            }
+            <article className='pending-fragments'>
+                {pendingFragments.length > 0 &&
+                    <div style={{ border: '1px solid red' }}>
+                        <h3>Tenemos fragmentos en proceso, vota por el que te guste</h3>
+                        {pendingFragments.map((fragment) => (
+                            <div key={fragment._id}>
+                                { console.log(fragment) }
+                                <span>{fragment.author.username}</span>
+                                <p>{fragment.content}</p>
+                                <button
+                                    disabled={votedFragments.includes(fragment._id)}
+                                    onClick={() => handleVote(fragment._id)
+                                    }>Vote</button>
+                                <button
+                                    disabled={!votedFragments.includes(fragment._id)}
+                                    onClick={() => handleRemoveVote(fragment._id)}
+                                >Quitar voto</button>
+                                <span>{fragment.votes}</span>
+                                {/* Si el usuario es el autor del fragmento, puede editar/eliminar */}
+                                {user && fragment.author && (user._id === fragment.author._id) && (
+                                    <>
+                                        <button onClick={() => handleEditFragment(fragment._id)}>Edit</button>
+                                        <button onClick={() => handleDeleteFragment(fragment._id)}>Delete</button>
+                                    </>
+                                )}
+                                {/* Si el usuario es el autor de la historia, puede aceptar fragmentos */}
+                                {user && story.author && (user._id === story.author._id) && (
+                                    <button onClick={() => handleAcceptFragment(fragment._id)}>Accept</button>
+                                )}
+                            </div>
+                        ))}
                     </div>
-                )) }
-            </div>
-        }
-        </article>
-        <FragmentsList fragments={acceptedFragments}/>
-    </section>
-  )
+                }
+            </article>
+            <FragmentsList fragments={acceptedFragments} />
+        </section>
+    )
 }
 
 export default StoryDetailsView
