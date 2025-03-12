@@ -20,7 +20,6 @@ export const fetchStoryById =  async (storyId) => {
 
 export const fetchStoriesOfUser = async (userId) => {
   try {
-    console.log(userId);
     const token = localStorage.getItem("authToken");
     const storiesRes = await api.get(`stories/user/${userId}`, {
       headers: {
@@ -33,4 +32,45 @@ export const fetchStoriesOfUser = async (userId) => {
   }
 };
 
+export const addStory = async (title, description, token) => {
+  try {
+    const storyResponse = await api.post("stories", { title: title, description: description }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return storyResponse.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+export const updateStory = async (storyId, title, description, status, token) => {
+  try {
+    const storyResponse = await api.put(`stories/${storyId}`, {
+      title: title,
+      description: description,
+      status: status
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return storyResponse.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const deleteStory = async (storyId, token) => {
+  try {
+    const storyResponse = await api.put(`stories/${storyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    return storyResponse.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
