@@ -45,12 +45,11 @@ export const addStory = async (title, description, token) => {
   }
 };
 
-export const updateStory = async (storyId, title, description, status, token) => {
+export const updateStory = async (storyId, title, description, token) => {
   try {
     const storyResponse = await api.put(`stories/${storyId}`, {
       title: title,
-      description: description,
-      status: status
+      description: description
     }, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -64,7 +63,7 @@ export const updateStory = async (storyId, title, description, status, token) =>
 
 export const deleteStory = async (storyId, token) => {
   try {
-    const storyResponse = await api.put(`stories/${storyId}`, {
+    const storyResponse = await api.delete(`stories/${storyId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       }
