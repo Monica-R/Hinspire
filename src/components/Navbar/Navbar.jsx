@@ -3,20 +3,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/auth.context';
 
 function Navbar() {
-  const { authToken, setAuthToken, user } = useAuth();
+  const { authToken, user, logout } = useAuth();
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    setAuthToken(null); //Borramos el token
-    navigate("/");
-  }
 
   return (
     <nav className='nav'>
-      { authToken ? (
+      { authToken && user ? (
         <>
           <Link to="/profile">Hi, { user?.username }!</Link>
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={() => {logout(); navigate("/");}}>Logout</button>
         </>
       ) : (
         <>
