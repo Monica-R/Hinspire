@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Modal.css';
 
-function Modal({ story, token, onDelete, onUpdate, children /*onRefresh*/ }) {
+function Modal({ story, token, onDelete, onUpdate, onConfirm, children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     title: story.title,
@@ -11,6 +11,7 @@ function Modal({ story, token, onDelete, onUpdate, children /*onRefresh*/ }) {
   // Determinar qué tipo de modal mostrar basado en qué función se pasó
   const isDeleteModal = !!onDelete;
   const isUpdateModal = !!onUpdate;
+  const isConfirmModal = !!onConfirm;
 
   const openModal = () => {
     setIsOpen(true);
@@ -36,10 +37,11 @@ function Modal({ story, token, onDelete, onUpdate, children /*onRefresh*/ }) {
     } else if (isUpdateModal) {
       // Pasar los datos del formulario a la función de actualización
       await onUpdate(story._id, formData.title, formData.description, token);
+    } else if (isConfirmModal) {
+      await onConfirm(story._id, token);
     }
     
     closeModal();
-    //setFormData({ title: '', content: '' });
   };
 
   return (
@@ -94,6 +96,16 @@ function Modal({ story, token, onDelete, onUpdate, children /*onRefresh*/ }) {
                 </div>
               </form>
             )}
+
+            {isConfirmModal &&
+              <div className="delete-confirmation">
+              <h3>¿Estás seguro de que quieres terminar la historia?</h3>
+                <div className="modal-buttons">
+                  <button onClick={closeModal}>Cancelar</button>
+                  <button className="finish-confirm" onClick={handleSubmit}>Terminar</button>
+                </div>
+              </div>
+            }
           </div>
         </div>
       )}
