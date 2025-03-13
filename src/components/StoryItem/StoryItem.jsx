@@ -2,39 +2,47 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/auth.context';
 import './StoryItem.css';
-import EditStoryModal from '../EditModal/EditModal';
+import Modal from '../Modal/Modal';
+import { deleteStory, updateStory } from '../../services/stories';
 
-function StoryItem({story}) {
+function StoryItem({story, getStories}) {
   const { authToken, user } = useAuth();
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (storyId, title, description, token) => {
     try {
-      //holaaa
+      await updateStory(storyId, title, description, token);
+      getStories();
     } catch (error) {
       console.error(error);
     }
   };
-  const handleDelete = async () => {
+  const handleDelete = async (storyId, token) => {
     try {
-      // holaaa
+      await deleteStory(storyId, token);
+      getStories();
     } catch (error) {
-     console.error(error); 
+      console.error(error); 
     }
   };
-
   return (
-    <Link to={`/stories/${story._id}`} className="story-card" story={story}>
-      <h2 className='story-title'>{ story.title }</h2>
-      <p className="story-author">{ story.author.username }</p>
-      { user?._id === story.author._id 
-        && 
-        <div className='options-buttons'>
-          <button className="delete-button" onClick={handleDelete}>Delete story</button>
-          <button className="update-button" onClick={handleUpdate}>Update story</button>
-          <EditStoryModal story={story} token={authToken} /* onUpdate={onUpdateStory} */ />
-        </div> 
-      }
-    </Link>
+    <div className="story-item-container">      
+      <Link to={`/stories/${story._id}`} className="story-card" story={story}>
+        <h2 className='story-title'>{ story.title }</h2>
+        <p className="story-author">{ story.author.username }</p>
+      </Link>
+        { user?._id === story.author._id 
+          && 
+          <div className='options-buttons'>
+              <Modal story={story} token={authToken} onDelete={handleDelete}>
+                <button className="delete-button">🗑️ Eliminar</button>
+              </Modal>
+
+              { story.fragments.length === 0 && <Modal story={story} token={authToken} onUpdate={handleUpdate}>
+                <button className="update-button">✏️ Editar</button>
+              </Modal>}
+          </div> 
+        }
+    </div>
   )
 }
 

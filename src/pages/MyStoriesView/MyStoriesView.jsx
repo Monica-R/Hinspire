@@ -1,6 +1,6 @@
 import './MyStoriesView.css';
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import StoryList from '../../components/StoryList/StoryList';
 import { useAuth } from '../../context/auth.context';
 import { addStory, fetchStoriesOfUser } from '../../services/stories';
@@ -13,26 +13,28 @@ function MyStoriesView() {
   const [stories, setStories] = useState([]);
   const { authToken, user } = useAuth();
 
-  useEffect(() => {
-    const getStories = async () => {
-      try {
-        const data = user && user._id ? await fetchStoriesOfUser(user._id) : [];
-        setStories(data);
-      } catch (error) {
-        console.error(error);
-      }
+  const getStories = useCallback(async () => {
+    try {
+      const data = user && user._id ? await fetchStoriesOfUser(user._id) : [];
+      setStories(data);
+    } catch (error) {
+      console.error(error);
     }
-    getStories();
   }, [user]);
+  
+  useEffect(() => {
+    getStories();
+  }, [getStories]);
+  
 
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       await addStory(title, description, authToken);
-      console.log('Story created');
       // Vacías los estados una vez añadida la historia
       setTitle("");
-      setDescription("");   
+      setDescription("");
+      getStories();
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +49,7 @@ function MyStoriesView() {
         <textarea id="description" value={description} name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
         <button type="submit">Create story</button>
       </form>
-      <StoryList stories={stories}/>
+      <StoryList stories={stories} getStories={getStories}/>
     </section>
   )
 }

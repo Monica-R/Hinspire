@@ -152,7 +152,6 @@ function StoryDetailsView() {
                         <h3>Tenemos fragmentos en proceso, vota por el que te guste</h3>
                         {pendingFragments.map((fragment) => (
                             <div key={fragment._id}>
-                                { console.log(fragment) }
                                 <span>{fragment.author.username}</span>
                                 <p>{fragment.content}</p>
                                 <button
