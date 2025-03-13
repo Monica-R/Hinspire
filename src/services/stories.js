@@ -73,3 +73,16 @@ export const deleteStory = async (storyId, token) => {
     console.error(error);
   }
 };
+
+export const completeStory = async (storyId, token) => {
+  try {
+    const storyResponse = await api.put(`stories/${storyId}/complete`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+    return storyResponse.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
