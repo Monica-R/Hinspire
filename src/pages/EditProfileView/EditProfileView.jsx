@@ -1,30 +1,80 @@
 import React from 'react'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/auth.context';
+import { editProfile, deleteProfile } from '../../services/profile';
 import './EditProfileView.css';
-import { Link } from 'react-router-dom';
 
 function EditProfileView() {
+  const navigate = useNavigate();
+  const { authToken, user, logout } = useAuth();
+  const [formData, setFormData] = useState({
+    name: user?.username || "",
+    email: user?.email || "",
+    password: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Profile updated');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name] : value
+    });
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await editProfile(formData, authToken);
+      navigate("/profile");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      await deleteProfile(authToken);
+      logout();
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className='edit-profile'>
+      <h2>Edit profile</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username</label>
-        <input type='text' id='username' name='username' />
+        <label htmlFor='name'>Username</label>
+        <input type='text' id='name' name='name' value={formData.name} onChange={handleChange}/>
         <label htmlFor='email'>Email</label>
-        <input type='email' id='email' name='email' />
+        <input type='email' id='email' name='email' value={formData.email} onChange={handleChange}/>
         <label htmlFor='password'>Password</label>
-        <input type='password' id='password' name='password' />
+        <input type='password' id='currentPassword' name='password' value={formData.password} onChange={handleChange}/>
         <button type='submit'>Update profile</button>
       </form>
       <div className="back-to"><Link to="/profile">Back to profile</Link></div>
       <div className="danger-zone">
-        <h2>Danger zone</h2>
-        <button className='delete-acc'>Delete account</button>
+        <h3>Danger zone</h3>
+        <button className='delete-acc' onClick={() => setShowDeleteModal(true)}>Delete account</button>
       </div>
+
+      {/* Modal de confirmación para eliminar la cuenta */}
+      {showDeleteModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Confirm Account Deletion</h3>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div className="modal-buttons">
+              <button onClick={() => setShowDeleteModal(false)}>Cancel</button>
+              <button className="delete-confirm" onClick={deleteAccount}>Confirm Delete</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
