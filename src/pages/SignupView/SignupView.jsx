@@ -60,7 +60,7 @@ function SignupView() {
               </label>
                 <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
               <input id="submit-button" className='signup-button' type="submit" value="Send" />
-              <Link className='signup-link' to="/signup">Don't have a account? Sign up</Link>
+              <Link className='signup-link' to="/login">Already have an account? Sign in</Link>
               <Link className='signup-link' to="/">Back</Link>
             </form>
           </div>
