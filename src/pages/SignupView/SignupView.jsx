@@ -2,12 +2,12 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '../../services/auth';
-import { useAuth } from '../../context/auth.context';
+import { useAuth,  } from '../../context/auth.context';
 import './SignupView.css';
 
 function SignupView() {
 
-  const { setAuthToken, user } = useAuth();
+  const { setAuthToken, user, isLoading, startLoading, stopLoading } = useAuth();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ function SignupView() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      startLoading();
       // Llamamos a la función signup del servicio
       const data = await signup({ email, password, username });
 
@@ -33,25 +34,35 @@ function SignupView() {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      stopLoading();
     }
   }
 
   return (
     <div className='signup-layer'>
-      <div className="signup-item">
-        <form onSubmit={handleSubmit} className="signup-form">
-          <label htmlFor="username">
-            <input id="username" type="text" placeholder='Your name' required onChange={(e) => setUsername(e.target.value)}/>
-          </label>
-          <label htmlFor="email">
-            <input id="email" type="email" placeholder='Your email' required onChange={(e) => setEmail(e.target.value)}/>
-          </label>
-          <label htmlFor="pass">
-            <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
-          </label>
-          <input id="submit-button" type="submit" value="Send" />
-        </form>
-      </div>
+      { isLoading ? (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+          <ClipLoader color="#36d7b7" size={100}/>
+        </div>
+      ) : (
+        <>
+          <div className="signup-item">
+            <form onSubmit={handleSubmit} className="signup-form">
+              <label htmlFor="username">
+                <input id="username" type="text" placeholder='Your name' required onChange={(e) => setUsername(e.target.value)}/>
+              </label>
+              <label htmlFor="email">
+                <input id="email" type="email" placeholder='Your email' required onChange={(e) => setEmail(e.target.value)}/>
+              </label>
+              <label htmlFor="pass">
+                <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
+              </label>
+              <input id="submit-button" type="submit" value="Send" />
+            </form>
+          </div>
+        </>
+      )}
     </div>
   )
 }
