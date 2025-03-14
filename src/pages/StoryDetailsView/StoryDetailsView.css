@@ -1,0 +1,21 @@
+.fragment-form {
+    width: 20%;
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: 2em;
+    margin-top: 2em;
+}
+
+.fragment__h2 {
+    color: var(--bistre);
+}
+
+.add-button {
+    width: 50%;
+    margin-top: 1em;
+    height: auto;
+}
+
+textarea {
+    font-family: var(--font-lora);
+}

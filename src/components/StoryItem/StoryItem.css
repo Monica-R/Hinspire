@@ -1,0 +1,29 @@
+.story-item-container {
+    width: 40%;
+    height: calc(10rem - 2vh);
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    margin-left: 1em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.options-buttons {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    column-gap: .5em;
+}
+
+.delete-button {
+    background-color: rgb(177, 1, 1);
+}
+
+.update-button {
+    background-color: #580f7a;
+}
+
+.finish-button {
+    background-color: var(--bistre);
+    color: var(--color-white);
+}

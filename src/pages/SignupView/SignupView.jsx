@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../../services/auth';
 import { useAuth,  } from '../../context/auth.context';
 import './SignupView.css';
@@ -43,22 +43,25 @@ function SignupView() {
     <div className='signup-layer'>
       { isLoading ? (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-          <ClipLoader color="#36d7b7" size={100}/>
+          <ClipLoader color="#da667b" size={100}/>
         </div>
       ) : (
         <>
           <div className="signup-item">
             <form onSubmit={handleSubmit} className="signup-form">
+              <h2 className='signup__h2'>Sign up</h2>
               <label htmlFor="username">
+              </label>
                 <input id="username" type="text" placeholder='Your name' required onChange={(e) => setUsername(e.target.value)}/>
-              </label>
               <label htmlFor="email">
+              </label>
                 <input id="email" type="email" placeholder='Your email' required onChange={(e) => setEmail(e.target.value)}/>
-              </label>
               <label htmlFor="pass">
-                <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
               </label>
-              <input id="submit-button" type="submit" value="Send" />
+                <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
+              <input id="submit-button" className='signup-button' type="submit" value="Send" />
+              <Link className='signup-link' to="/signup">Don't have a account? Sign up</Link>
+              <Link className='signup-link' to="/">Back</Link>
             </form>
           </div>
         </>

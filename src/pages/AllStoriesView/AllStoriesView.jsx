@@ -29,7 +29,7 @@ function AllStoriesView() {
     <section className='story-list'>
       { isLoading ? (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-          <ClipLoader color="#36d7b7" size={100}/>
+          <ClipLoader color="#da667b" size={100}/>
         </div>
       ) : (
         <StoryList stories={stories}/>

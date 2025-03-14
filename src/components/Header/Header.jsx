@@ -9,9 +9,6 @@ function Header() {
         <div className="logo">Hinspire</div>
         <Navbar />
       </div>
-      <div className="header__banner">
-        <h1 className="header__h1">Create. Collaborate. Get inspired.</h1>
-      </div>
     </header>
   )
 }

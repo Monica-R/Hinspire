@@ -60,14 +60,14 @@ function Modal({ story, token, onDelete, onUpdate, onConfirm, children }) {
                 <h3>¿Estás seguro de que quieres eliminar esta historia?</h3>
                 <p>Título: {story.title}</p>
                 <div className="modal-buttons">
-                  <button onClick={closeModal}>Cancelar</button>
+                  <button className='cancel' onClick={closeModal}>Cancelar</button>
                   <button className="delete-confirm" onClick={handleSubmit}>Eliminar</button>
                 </div>
               </div>
             )}
             
             {isUpdateModal && (
-              <form onSubmit={handleSubmit}>
+              <form className='form-upd' onSubmit={handleSubmit}>
                 <h3>Actualizar historia</h3>
                 <div className="form-group">
                   <label htmlFor="title">Título:</label>

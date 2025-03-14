@@ -54,12 +54,12 @@ function EditProfileView() {
     <div className='edit-profile'>
       { isLoading ? (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-          <ClipLoader color="#36d7b7" size={100}/>
+          <ClipLoader color="#da667b" size={100}/>
         </div>
       ) : (
         <>
           <h2>Edit profile</h2>
-          <form onSubmit={handleSubmit}>
+          <form className='edit-form' onSubmit={handleSubmit}>
             <label htmlFor='name'>Username</label>
             <input type='text' id='name' name='name' value={formData.name} onChange={handleChange}/>
             <label htmlFor='email'>Email</label>

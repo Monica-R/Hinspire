@@ -2,8 +2,8 @@
     width: 15%;
     height: 5vh;
     display: flex;
-    justify-content: space-between;
     justify-content: space-around;
+    align-items: center;
     color: var(--bistre);
 }
 

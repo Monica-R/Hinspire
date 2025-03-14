@@ -51,21 +51,23 @@ const { isLoading, startLoading, stopLoading } = useAuth();
     <div className="profile-container">
       { isLoading ? (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-          <ClipLoader color="#36d7b7" size={100}/>
+          <ClipLoader color="#da667b" size={100}/>
         </div>        
       ) : (
         <>
           <section className="profile-header">
-            <img src={user.avatar || "/default-avatar.png"} alt="User avatar" />
+            <div className="image-user">
+              <img src={user.avatar || "/images/stars.jpg"} alt="User avatar" />
+            </div>
             <h2>{user.username}</h2>
             <p>{user.email}</p>
+            <Link className='profile-link' to="/edit-profile">Edit profile</Link>
           </section>
 
           <section className="profile-zone">
             <div className="navbar-options">          
-              <Link to="/stories">Explore</Link>
-              <Link to="/stories/user">My Stories</Link>
-              <Link to="/edit-profile">Edit profile</Link>
+              <Link className='link' to="/stories">Explore</Link>
+              <Link className='link' to="/stories/user">My Stories</Link>
             </div>
             <article className="recent-stories">
               <h2 className="recent-stories__h2">Recent stories</h2>
@@ -74,7 +76,7 @@ const { isLoading, startLoading, stopLoading } = useAuth();
             ) : (
               <ul>
                 {getStoriesDesc.slice(0, 5).map(story => (
-                  <li key={story._id}>
+                  <li className='recent-item' key={story._id}>
                     <a href={`/stories/${story._id}`}>{story.title}</a>
                   </li>
                 ))}

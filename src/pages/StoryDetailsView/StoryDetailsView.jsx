@@ -141,9 +141,10 @@ function StoryDetailsView() {
             {
                 story.status !== 'completed' &&
                 pendingFragments.length < 3 &&
-                <form onSubmit={handleSubmit}>
-                    <textarea name="content" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
-                    <button type='submit'>Add fragment</button>
+                <form className='fragment-form' onSubmit={handleSubmit}>
+                    <h2 className='fragment__h2'>Add fragment</h2>
+                    <textarea name="content" cols="50" rows="10" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
+                    <button className='add-button' type='submit'>Add fragment</button>
                 </form>
             }
             <article className='pending-fragments'>
