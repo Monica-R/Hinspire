@@ -1,0 +1,21 @@
+.header {
+    width: 100%;
+    background-color: var(--khaki);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header__div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.logo {
+    font-size: calc(1rem + .5vw);
+    font-weight: 400;
+    height: fit-content;
+}
+

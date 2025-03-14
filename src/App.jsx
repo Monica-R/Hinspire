@@ -1,33 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/auth.provider'
+import LoginView from './pages/LoginView/LoginView'
+import SignupView from './pages/SignupView/SignupView'
+import HomeView from './pages/HomeView/HomeView'
+import ProfileView from './pages/ProfileView/ProfileView'
+import Admin from './pages/Admin/Admin'
+import NotFound from './pages/NotFound/NotFound'
+import AllStoriesView from './pages/AllStoriesView/AllStoriesView'
+import MyStoriesView from './pages/MyStoriesView/MyStoriesView'
+import EditProfileView from './pages/EditProfileView/EditProfileView'
+import Layout from './layouts/Layout'
+import StoryDetailsView from './pages/StoryDetailsView/StoryDetailsView'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={ <Layout /> }>
+              <Route index element={ <HomeView /> } />
+              <Route path='/login' element={ <LoginView  /> }/>
+              <Route path='/signup' element={ <SignupView /> }/>
+              <Route path='/profile' element={ <ProfileView /> } />
+              <Route path='/admin' element={ <Admin /> } />
+              <Route path='/stories' element={ <AllStoriesView /> } />
+              <Route path='/stories/:id' element={ <StoryDetailsView /> } />
+              <Route path='/stories/user' element={ <MyStoriesView /> } />
+              <Route path='/edit-profile' element={ <EditProfileView /> } />
+              <Route path='*' element={<NotFound />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </>
   )
 }
