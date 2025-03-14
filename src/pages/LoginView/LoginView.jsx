@@ -7,7 +7,7 @@ import './LoginView.css';
 
 function LoginView() {
 
-  const { setAuthToken, user } = useAuth();
+  const { setAuthToken, user, isLoading, startLoading, stopLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,6 +22,7 @@ function LoginView() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
+      startLoading();
       // Llamamos a la función login del servicio
       const data = await login({ email, password });
 
@@ -32,26 +33,36 @@ function LoginView() {
       }
     } catch (error) {
       console.error(error)
-    }    
+    }  finally {
+      stopLoading();
+    }  
 
   }
 
 
   return (
     <div className='login-layer'>
-      <div className="login-item">
-        <form onSubmit={handleSubmit} className="login-form">
-          <label htmlFor="email">
-            Email
-            <input id="email" type="email" required onChange={(e) => setEmail(e.target.value)}/>
-          </label>
-          <label htmlFor="pass">
-            Password
-            <input id="pass" type="password" required onChange={(e) => setPassword(e.target.value)}/>
-          </label>
-          <input id="submit-button" type="submit" value="Send" />
-        </form>
-      </div>
+      { isLoading ? (
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+          <ClipLoader color="#36d7b7" size={100}/>
+        </div>
+      ) : (
+       <>
+        <div className="login-item">
+          <form onSubmit={handleSubmit} className="login-form">
+            <label htmlFor="email">
+              Email
+              <input id="email" type="email" required onChange={(e) => setEmail(e.target.value)}/>
+            </label>
+            <label htmlFor="pass">
+              Password
+              <input id="pass" type="password" required onChange={(e) => setPassword(e.target.value)}/>
+            </label>
+            <input id="submit-button" type="submit" value="Send" />
+          </form>
+        </div>
+       </> 
+      )}
     </div>
   )
 }
