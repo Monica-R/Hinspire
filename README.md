@@ -131,17 +131,3 @@ Licencia
 Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
 
 ¡Gracias por usar esta plataforma! 🚀
-
-
----
-
-### **Explicación del README.md**
-
-1. **Funcionalidades Principales**: Describe las características clave del frontend, como la autenticación, gestión de perfiles, historias, fragmentos y votación.
-2. **Estructura del Proyecto**: Explica cómo están organizados los servicios (llamadas a la API) y los componentes principales.
-3. **Instalación**: Proporciona pasos claros para configurar y ejecutar el proyecto.
-4. **Uso**: Explica cómo interactuar con las diferentes partes de la aplicación.
-5. **Tecnologías**: Enumera las tecnologías utilizadas en el frontend.
-6. **Contribución**: Instrucciones para contribuir al proyecto.
-
-Este README.md es ideal para la parte del frontend y complementa el README.md del backend que te proporcioné anteriormente. ¡Espero que te sea útil! 😊
