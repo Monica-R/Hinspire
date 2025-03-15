@@ -27,7 +27,6 @@ function StoryItem({story, getStories}) {
 
   const finishStory = async (storyId, token) => {
     try {
-      console.log(token)
       await completeStory(storyId, token);
       getStories();
     } catch (error) {
