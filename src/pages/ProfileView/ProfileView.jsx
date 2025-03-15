@@ -11,12 +11,7 @@ function ProfileView() {
 
   const [user, setUser] = useState(null);
   const [stories, setStories] = useState([]);
-const { authToken, isLoading, startLoading, stopLoading } = useAuth();
-  
-  useEffect(() => {
-    getProfileUser();
-    getRecentStories();
-  }, [getProfileUser, getRecentStories]);
+  const { authToken, isLoading, startLoading, stopLoading } = useAuth();
 
   const getProfileUser = useCallback(async () => {
     try {
@@ -41,6 +36,11 @@ const { authToken, isLoading, startLoading, stopLoading } = useAuth();
       stopLoading();
     }
   }, [startLoading, stopLoading]);
+
+  useEffect(() => {
+    getProfileUser();
+    getRecentStories();
+  }, [getProfileUser, getRecentStories]);
 
   const getStoriesDesc = stories.sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
