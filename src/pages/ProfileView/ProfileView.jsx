@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
@@ -16,9 +16,9 @@ const { authToken, isLoading, startLoading, stopLoading } = useAuth();
   useEffect(() => {
     getProfileUser();
     getRecentStories();
-  }, []);
+  }, [getProfileUser, getRecentStories]);
 
-  const getProfileUser = async () => {
+  const getProfileUser = useCallback(async () => {
     try {
       startLoading();
       const profile = await fetchProfile(authToken);
@@ -28,9 +28,9 @@ const { authToken, isLoading, startLoading, stopLoading } = useAuth();
     } finally {
       stopLoading();
     }
-  };
+  }, [authToken, startLoading, stopLoading]);
   
-  const getRecentStories = async () => {
+  const getRecentStories = useCallback(async () => {
     try {
       startLoading();
       const stories = await fetchStories();
@@ -40,7 +40,7 @@ const { authToken, isLoading, startLoading, stopLoading } = useAuth();
     } finally {
       stopLoading();
     }
-  };
+  }, [startLoading, stopLoading]);
 
   const getStoriesDesc = stories.sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
