@@ -3,7 +3,7 @@ import { api } from "./config";
 export const fetchProfile = async () => {
   try {
     const token = localStorage.getItem("authToken");
-    const userRes = await api.get(`user/profile`, {
+    const userRes = await api.get("/user/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -17,7 +17,7 @@ export const fetchProfile = async () => {
 
 export const editProfile = async (requestBody, token) => {
   try {
-    const userRes = await api.put("user/profile", {
+    const userRes = await api.put("/user/profile", {
       name: requestBody.name,
       email: requestBody.email,
       password: requestBody.password,
@@ -34,7 +34,7 @@ export const editProfile = async (requestBody, token) => {
 
 export const deleteProfile = async (token) =>{
   try {
-    const userRes = await api.delete("user/profile", {
+    const userRes = await api.delete("/user/profile", {
       headers: {
         Authorization: `Bearer ${token}`
       }

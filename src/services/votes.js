@@ -2,7 +2,7 @@ import { api } from './config';
 
 export const getUserVotes = async (token) => {
     try {
-        const response = await api.get("votes/myvotes", {
+        const response = await api.get("/votes/myvotes", {
             headers: { Authorization: `Bearer ${token}` },
         });
         return response.data; // Supongamos que devuelve un array de fragment IDs
@@ -14,7 +14,7 @@ export const getUserVotes = async (token) => {
 
 export const addVote = async (fragmentId, token) =>{
     try {
-        const response = await api.post(`votes/vote/${fragmentId}`, {}, {
+        const response = await api.post(`/votes/vote/${fragmentId}`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
@@ -27,7 +27,7 @@ export const addVote = async (fragmentId, token) =>{
 
 export const removeVote = async (fragmentId, token) => {
     try {
-        const response = await api.delete(`votes/vote/${fragmentId}`, {
+        const response = await api.delete(`/votes/vote/${fragmentId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
