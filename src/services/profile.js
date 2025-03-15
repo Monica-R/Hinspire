@@ -1,8 +1,7 @@
 import { api } from "./config";
 
-export const fetchProfile = async () => {
+export const fetchProfile = async (token) => {
   try {
-    const token = localStorage.getItem("authToken");
     const userRes = await api.get("/user/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
