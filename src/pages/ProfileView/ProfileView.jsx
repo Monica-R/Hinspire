@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 import { fetchStories } from '../../services/stories';
 import { fetchProfile } from '../../services/profile';
 import { useAuth } from '../../context/auth.context';
