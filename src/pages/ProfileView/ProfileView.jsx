@@ -10,7 +10,7 @@ function ProfileView() {
 
   const [user, setUser] = useState(null);
   const [stories, setStories] = useState([]);
-const { isLoading, startLoading, stopLoading } = useAuth();
+const { authToken, isLoading, startLoading, stopLoading } = useAuth();
   
   useEffect(() => {
     getProfileUser();
@@ -20,7 +20,7 @@ const { isLoading, startLoading, stopLoading } = useAuth();
   const getProfileUser = async () => {
     try {
       startLoading();
-      const profile = await fetchProfile();
+      const profile = await fetchProfile(authToken);
       setUser(profile.user);
     } catch (error) {
       console.error("Error loading profile", error);
