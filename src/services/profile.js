@@ -2,7 +2,6 @@ import { api } from "./config";
 
 export const fetchProfile = async (token) => {
   try {
-    console.info("el token:", token);
     const userRes = await api.get("/user/profile", {
       headers: {
         Authorization: `Bearer ${token}`,
