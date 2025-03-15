@@ -7,7 +7,6 @@ export const fetchProfile = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.info('la información:', userRes.data);
     return userRes.data;
   }
   catch (error) {

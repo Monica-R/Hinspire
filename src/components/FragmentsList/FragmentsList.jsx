@@ -1,7 +1,6 @@
 import React from 'react'
 
 function FragmentsList({fragments}) {
-  console.info('fragments', fragments);
   return (
     <article className='acepted-fragments'>
       { fragments.length > 0 ?
