@@ -11,11 +11,17 @@ function Navbar() {
     <nav className='nav'>
       { authToken && user ? (
         <>
+          <Link className=' link' to="/">Home</Link>
+          <Link className='link' to="/stories">Stories</Link>
+          <Link className=' link' to="#">About</Link>
           <Link className='link' to="/profile">Hi, { user?.username }!</Link>
-          <button onClick={() => {logout(); navigate("/");}}>Logout</button>
+          <button className='logout' onClick={() => {logout(); navigate("/");}}>Logout</button>
         </>
       ) : (
         <>
+          <Link className=' link' to="/">Home</Link>
+        <Link className='link' to="/stories">Stories</Link>
+          <Link className=' link' to="#">About</Link>
           <Link className=' link login' to="/login">Login</Link>
           <Link className=' link signup' to="/signup">SignUp</Link>
         </>

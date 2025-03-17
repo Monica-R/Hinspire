@@ -1,0 +1,17 @@
+.story-list {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 3em;
+    padding: 3em 0;
+}
+
+.storylist__h2 {
+    font-size: calc(2em + 1vw);
+    font-weight: 600;
+    color: var(--reseda-green);
+    margin-bottom: 1.6em;
+}

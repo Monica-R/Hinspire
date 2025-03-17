@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Header from '../components/Header/Header'
+import Footer from '../components/Footer/Footer';
 
 function Layout() {
   const location = useLocation();
@@ -9,6 +10,7 @@ function Layout() {
     <>
       {!hiddenRoutes.includes(location.pathname) && <Header />}
       <Outlet />
+      <Footer />
     </>
   )
 }
