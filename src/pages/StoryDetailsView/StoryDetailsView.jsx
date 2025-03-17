@@ -134,11 +134,19 @@ function StoryDetailsView() {
     return (
         <section className='story-section'>
             <article className='content'>
-                <h2 className='story-title'>{story.title}</h2>
-                {story.author && <p className='story-author'>{story.author.username}</p>}
+                <h2 className='story-title title-view'>
+                    <ion-icon name="bookmark"></ion-icon>
+                    {story.title}
+                </h2>
+                {story.author && 
+                    <p className='story-author v-author'>
+                        {story.author.username}
+                    </p>
+                }
                 <p className='story-content'>{story.description}</p>
             </article>
             {
+                authToken &&
                 story.status !== 'completed' &&
                 pendingFragments.length < 3 &&
                 <form className='fragment-form' onSubmit={handleSubmit}>
@@ -148,22 +156,28 @@ function StoryDetailsView() {
                 </form>
             }
             <article className='pending-fragments'>
-                {pendingFragments.length > 0 &&
-                    <div style={{ border: '1px solid red' }}>
-                        <h3>Tenemos fragmentos en proceso, vota por el que te guste</h3>
+                <h3 className='fragments__h3'>We have fragments in process, vote for the one you like.</h3>
+                {authToken && pendingFragments.length > 0 &&
+                    <div className='pending-f'>
                         {pendingFragments.map((fragment) => (
-                            <div key={fragment._id}>
-                                <span>{fragment.author.username}</span>
-                                <p>{fragment.content}</p>
-                                <button
-                                    disabled={votedFragments.includes(fragment._id)}
-                                    onClick={() => handleVote(fragment._id)
-                                    }>Vote</button>
-                                <button
-                                    disabled={!votedFragments.includes(fragment._id)}
-                                    onClick={() => handleRemoveVote(fragment._id)}
-                                >Quitar voto</button>
-                                <span>{fragment.votes}</span>
+                            <div className='fragment' key={fragment._id}>
+                                <span className='fragment-author'>{fragment.author.username}</span>
+                                <p className='fragment-content'>{fragment.content}</p>
+                                <div className="options">
+                                    <button className='fragment-vote'
+                                        disabled={votedFragments.includes(fragment._id)}
+                                        onClick={() => handleVote(fragment._id)
+                                        }>
+                                            <ion-icon name="heart"></ion-icon>
+                                        </button>
+                                    <span className='count'>{fragment.votes}</span>
+                                    <button className='fragment-delete-vote'
+                                        disabled={!votedFragments.includes(fragment._id)}
+                                        onClick={() => handleRemoveVote(fragment._id)}
+                                    >
+                                       <ion-icon name="heart-dislike"></ion-icon> 
+                                    </button>
+                                </div>
                                 {/* Si el usuario es el autor del fragmento, puede editar/eliminar */}
                                 {user && fragment.author && (user._id === fragment.author._id) && (
                                     <>
