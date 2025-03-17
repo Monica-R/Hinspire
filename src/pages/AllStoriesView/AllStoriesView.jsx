@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useEffect, useState } from 'react'
 import { fetchStories } from '../../services/stories';
 import StoryList from '../../components/StoryList/StoryList';
@@ -11,20 +11,20 @@ function AllStoriesView() {
   const [stories, setStories] = useState([]);
   const { isLoading, startLoading, stopLoading } = useAuth();
 
-  useEffect(() => {
-    const getStories = async () => {
-      try {
-        startLoading();
-        const data = await fetchStories();
-        setStories(data);
-      } catch (error) {
-          console.error(error);
-      } finally {
-        stopLoading();
-      }
+  const getStories = useCallback(async () => {
+    try {
+      startLoading();
+      const data = await fetchStories();
+      setStories(data);
+    } catch (error) {
+        console.error(error);
+    } finally {
+      stopLoading();
     }
+  }, [startLoading, stopLoading])
+  useEffect(() => {
       getStories();
-  }, [startLoading, stopLoading]);
+  }, [getStories]);
   return (
     <section className='story-list'>
       <h2 className='storylist__h2'>Explore all stories</h2>
