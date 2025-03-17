@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link/*, useNavigate*/ } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth.context';
 import './StoryItem.css';
 import Modal from '../Modal/Modal';
@@ -7,7 +7,7 @@ import { deleteStory, updateStory, completeStory } from '../../services/stories'
 
 function StoryItem({story, getStories}) {
   const { authToken, user } = useAuth();
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleUpdate = async (storyId, title, description, token) => {
     try {
@@ -35,17 +35,17 @@ function StoryItem({story, getStories}) {
     }
   }
 
-  // const navigateToPath = (event) => {
-  //   if (!authToken) {
-  //     event.preventDefault();
-  //     navigate("/login");
-  //   }
-  // }
+  const navigateToPath = (event) => {
+    if (!authToken) {
+      event.preventDefault();
+      navigate("login");
+    }
+  }
 
   return (
     <div className="story-item-container">
       <div className="layer"></div>
-      <Link to={`/stories/${story._id}`} className="story-card" story={story}>
+      <Link to={`/stories/${story._id}`} onClick={navigateToPath} className="story-card" story={story}>
         <h2 className='story-title'>{ story.title }</h2>
         <p className="story-author"><ion-icon name="person"></ion-icon> { story.author.username }</p>
       </Link>

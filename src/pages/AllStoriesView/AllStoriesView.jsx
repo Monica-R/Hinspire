@@ -14,7 +14,6 @@ function AllStoriesView() {
   useEffect(() => {
     const getStories = async () => {
       try {
-        //startLoading();
         const data = await fetchStories();
         setStories(data);
       } catch (error) {
