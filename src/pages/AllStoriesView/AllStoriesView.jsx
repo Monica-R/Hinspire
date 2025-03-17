@@ -27,6 +27,7 @@ function AllStoriesView() {
   }, [startLoading, stopLoading]);
   return (
     <section className='story-list'>
+      <h2 className='storylist__h2'>Explore all stories</h2>
       { isLoading ? (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
           <ClipLoader color="#da667b" size={100}/>
