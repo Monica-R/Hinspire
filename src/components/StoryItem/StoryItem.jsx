@@ -38,7 +38,7 @@ function StoryItem({story, getStories}) {
   const navigateToPath = (event) => {
     if (!authToken) {
       event.preventDefault();
-      navigate("login");
+      navigate("/login");
     }
   }
 
