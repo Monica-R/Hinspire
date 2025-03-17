@@ -53,7 +53,9 @@ function Modal({ story, token, onDelete, onUpdate, onConfirm, children }) {
       {isOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <button className="close-button" onClick={closeModal}>×</button>
+            <button className="close-button" onClick={closeModal}>
+              <ion-icon name="close"></ion-icon>
+            </button>
             
             {isDeleteModal && (
               <div className="delete-confirmation">

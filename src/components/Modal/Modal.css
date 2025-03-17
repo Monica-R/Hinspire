@@ -1,13 +1,14 @@
 .modal-overlay {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.350);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .modal-content {
@@ -16,6 +17,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 2em 3em;
+}
+
+.close-button {
+    font-size: calc(1.4rem + .4vw);
+    background-color: transparent;
+    position: absolute;
+    top: 42%;
+    left: 66%;
+    color: var(--bistre);
 }
 
 .delete-confirmation,
