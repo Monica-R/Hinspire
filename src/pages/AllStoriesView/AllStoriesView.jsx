@@ -9,22 +9,20 @@ import { ClipLoader } from 'react-spinners';
 function AllStoriesView() {
 
   const [stories, setStories] = useState([]);
-  const { isLoading, startLoading, stopLoading } = useAuth();
+  const { isLoading } = useAuth();
 
   useEffect(() => {
     const getStories = async () => {
       try {
-        startLoading();
+        //startLoading();
         const data = await fetchStories();
         setStories(data);
       } catch (error) {
           console.error(error);
-      } finally {
-        stopLoading();
       }
     }
       getStories();
-  }, [startLoading, stopLoading]);
+  }, []);
   return (
     <section className='story-list'>
       
