@@ -1,6 +1,5 @@
 .header {
     width: 100%;
-    background-color: var(--khaki);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,13 +8,15 @@
 .header__div {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 2rem;
+    align-items: center;
 }
 
 .logo {
+    font-family: var(--font-raleway);
     font-size: calc(1rem + .5vw);
-    font-weight: 400;
+    font-weight: 600;
     height: fit-content;
+    color: var(--bistre);
 }
-
