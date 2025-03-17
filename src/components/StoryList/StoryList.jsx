@@ -8,7 +8,9 @@ function StoryList({stories, getStories}) {
     : stories.map((story) => <StoryItem key={story._id} story={story} getStories={getStories}/>);
 
   return (
-    <>{ getStoriesData }</>
+    <section className='storylist'>
+      { getStoriesData }
+    </section>
   )
 }
 

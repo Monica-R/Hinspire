@@ -1,0 +1,8 @@
+.storylist {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 6em;
+    column-gap: 2em;
+}
