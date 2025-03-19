@@ -6,13 +6,6 @@ function HomeView() {
   return (
     <>
       <section className='section-one'>
-        {/* <div className="layer-container">
-          <div className="img-layer img-1"></div>
-          <div className="img-layer img-2"></div>
-          <div className="img-layer img-3"></div>
-          <div className="img-layer img-4"></div>
-          <div className="img-layer img-5"></div>
-        </div> */}
         <div className="header__banner">
           <h1 className="header__h1"><span className='span-1'>Create.</span> Collaborate. <span className='span-2'>Get inspired.</span></h1>
           <p className='header__p'>
@@ -31,7 +24,7 @@ function HomeView() {
 
       </section>
       <section className='section-two'>
-        <h2 className='section-one__h2'>Unleash your creativity!</h2>
+        <h2 className='section-two__h2'>Unleash your creativity!</h2>
         <div className="pictures">
           <figure className="pic">
             <img src="/images/icons/icon-1.png" alt="icon-1" />
