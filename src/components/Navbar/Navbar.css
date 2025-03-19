@@ -53,8 +53,9 @@
   
     .nav-links {
       display: flex;
+      position:initial;
       flex-direction: row;
-      position: static;
+      align-items: center;
       background: none;
     }
   
