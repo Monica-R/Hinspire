@@ -10,12 +10,8 @@
     width: 50%;
 }
 
-.story-author, .story-content {
+.story-content {
     margin: 1em 0;
-}
-
-.story-author {
-    font-size: calc(2rem - .2vw);
 }
 
 .pending-fragments {
