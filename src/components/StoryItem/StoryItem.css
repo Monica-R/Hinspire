@@ -1,5 +1,5 @@
 .story-item-container {
-    width: 32%;
+    width: 100%;
     height: calc(23rem - 2vh);
     display: flex;
     flex-direction: column;
@@ -7,6 +7,7 @@
     align-items: flex-start;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     position: relative;
+    padding-bottom: 1em;
     border-radius: .4em;
     -webkit-border-radius: .4em;
     -moz-border-radius: .4em;
@@ -32,12 +33,13 @@
 }
 
 .story-card {
+    width: 100%;
     padding: 0 1em;
     text-decoration: none;
 }
 
 .story-title {
-    font-size: calc(1em + .2vw);
+    font-size: calc(1.6em + .2vw);
     font-weight: 600;
     color: var(--blush);
     padding: .2em .6em;
@@ -47,12 +49,12 @@
     -ms-border-radius: 1em;
     -o-border-radius: 1em;
     margin: 0;
-    padding-top: 2em;
+    text-align: left;
 }
 
 .story-author {
     color: var(--reseda-green);
-    font-size: calc(1em + .1vw);
+    font-size: calc(1.4em - .1vw);
     font-weight: 600;
 }
 
@@ -60,18 +62,28 @@
     width: 50%;
     display: flex;
     justify-content: center;
-    column-gap: .5em;
+    padding: 1rem;
+}
+
+.delete-button, .update-button, .finish-button {
+    font-size: 2rem;
+    background-color: unset;
 }
 
 .delete-button {
-    background-color: rgb(177, 1, 1);
+    color: rgb(177, 1, 1);
 }
 
 .update-button {
-    background-color: #580f7a;
+    color: #580f7a;
 }
 
 .finish-button {
-    background-color: var(--bistre);
-    color: var(--color-white);
+    color: var(--bistre);
+}
+
+@media(width >= 1024px) {
+    .story-item-container  {
+        width: 32%;
+    }
 }

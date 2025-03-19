@@ -1,8 +1,17 @@
 .storylist {
-    width: 60%;
+    width: 90%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
     row-gap: 6em;
     column-gap: 2em;
+}
+
+@media (width >= 1024px) {
+    .storylist {
+        width: 60%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
