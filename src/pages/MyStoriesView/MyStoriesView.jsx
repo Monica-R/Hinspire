@@ -51,12 +51,13 @@ function MyStoriesView() {
         </div>      
       ) : (
         <>
-          <form onSubmit={handleSubmit}>
+          <form className='story-form' onSubmit={handleSubmit}>
+            <h2 className='story-form__h2'>Create story</h2>
             <label htmlFor="title"></label>
-            <input type="text" value={title} id="title" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
+            <input className='input-title' type="text" value={title} id="title" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
             <label htmlFor="description"></label>
-            <textarea id="description" value={description} name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
-            <button type="submit">Create story</button>
+            <textarea id="description" rows="10" value={description} name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
+            <button className='story-button' type="submit">Create story</button>
           </form>
           <StoryList stories={stories} getStories={getStories}/>
         </>
