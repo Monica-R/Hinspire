@@ -10,12 +10,8 @@
     width: 50%;
 }
 
-.story-author, .story-content {
+.story-content {
     margin: 1em 0;
-}
-
-.story-author {
-    font-size: calc(2rem - .2vw);
 }
 
 .pending-fragments {
@@ -89,6 +85,10 @@ textarea {
 
 .story-content {
     font-size: calc(1.6rem + .2vw);
+}
+
+.empty {
+    display: none;
 }
 
 .fragment-author {

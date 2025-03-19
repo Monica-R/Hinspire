@@ -6,6 +6,7 @@ import { createFragment, updateFragment, deleteFragment, acceptFragment } from '
 import { fetchStoryById } from '../../services/stories';
 import { getUserVotes, addVote, removeVote } from '../../services/votes';
 import { useAuth } from '../../context/auth.context';
+import Pagination from '../../components/Pagination/Pagination';
 
 function StoryDetailsView() {
     const { authToken, user } = useAuth();
@@ -16,6 +17,13 @@ function StoryDetailsView() {
 
     const pendingFragments = story.pendingFragments || [];
     const acceptedFragments = story.fragments || [];
+
+    // Estado para paginar los fragmentos de la historia
+    const [currentFragmentPage, setCurrentFragmentPage] = useState(1);
+    const fragmentsPerPage = 5;
+    const totalFragmentPages = Math.ceil(acceptedFragments.length / fragmentsPerPage);
+    const startIndex = (currentFragmentPage - 1) * fragmentsPerPage;
+    const displayedFragments = acceptedFragments.slice(startIndex, startIndex + fragmentsPerPage);
 
       // Función para refrescar la historia
     const refreshStory = useCallback(async () => {
@@ -155,7 +163,7 @@ function StoryDetailsView() {
                     <button className='add-button' type='submit'>Add fragment</button>
                 </form>
             }
-            <article className='pending-fragments'>
+            <article className={pendingFragments.length === 0 ? 'empty' : 'pending-fragments'}>                
                 <h3 className='fragments__h3'>We have fragments in process, vote for the one you like.</h3>
                 {authToken && pendingFragments.length > 0 &&
                     <div className='pending-f'>
@@ -194,7 +202,12 @@ function StoryDetailsView() {
                     </div>
                 }
             </article>
-            <FragmentsList fragments={acceptedFragments} />
+            <FragmentsList fragments={displayedFragments} />
+            {
+                totalFragmentPages > 1 && (
+                    <Pagination totalPages={totalFragmentPages} currentPage={currentFragmentPage} onPageChange={setCurrentFragmentPage}/>
+                )
+            }
         </section>
     )
 }

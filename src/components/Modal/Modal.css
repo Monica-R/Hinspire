@@ -61,6 +61,6 @@
 }
 
 .form-group textarea {
-    border: 1px solid rgb(214, 214, 214);
+    border: 1px solid #ccc;
     border-radius: .2em;
 }

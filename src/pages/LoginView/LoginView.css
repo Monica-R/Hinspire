@@ -41,8 +41,3 @@
     font-size: calc(1rem + .2vw);
     color: var(--bistre);
 }
-
-input, label {
-    width: 80%;
-    margin-bottom: 1rem;
-}

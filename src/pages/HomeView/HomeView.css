@@ -1,49 +1,113 @@
+.section-one {
+    width: 100%;
+    height: 80vh;
+    color: var(--bistre);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__banner {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 2em;
+}
+
+.span-1, .span-2{
+    font-family: var(--font-raleway);
+    font-weight: bold;
+}
+
+.header__h1 {
+    width: 100%;
+    font-size: calc(2.4rem + 1vw);
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-banner {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    img {
+        width: 100%;
+    }
+}
+
+.sign-up {
+    width: 50%;
+    font-size: calc(.8rem + 1vw);
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--reseda-green);
+    color: var(--color-white);
+    font-family: var(--font-raleway);
+    padding: .6em .4em;
+    border-radius: 2em;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    -ms-border-radius: 2em;
+    -o-border-radius: 2em;
+}
+
+.section-two {
+    margin: 4em 0;
+}
+
+.section-two__h2 {
+    width: 80%;
+    margin: 2rem auto;
+    font-size: calc(1.6rem + .6vw);
+    font-weight: 600;
+}
+
+.pictures {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 3rem;
+}
+
+.pic {
+    width: 32%;
+    img {
+        width: 100%;
+    }
+}
+
+figcaption {
+    text-align: center;
+    font-size: calc(1rem + 1vw);
+    font-weight: 600;
+    padding: 1rem 0;
+    color: var(--blush);
+}
 
 @media (width >= 1024px) {
     /* General styles */
     .section-one {
-        width: 100%;
-        height: 80vh;
-        color: var(--bistre);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: row;
     }
     
     .header__banner {
         width: 40%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        row-gap: 2em;
-    }
-    
-    .span-1, .span-2{
-        font-family: var(--font-raleway);
-        font-weight: bold;
     }
     
     .header__h1 {
-        width: 100%;
         font-size: calc(4rem + 2vw);
-        font-weight: bold;
     }
     
     .sign-up {
-        width: 30%;
-        font-size: calc(.6rem + 1vw);
+        width: 40%;
         font-weight: 500;
-        text-align: center;
-        background-color: var(--reseda-green);
-        color: var(--color-white);
-        font-family: var(--font-raleway);
-        padding: .6em .4em;
-        border-radius: 2em;
-        -webkit-border-radius: 2em;
-        -moz-border-radius: 2em;
-        -ms-border-radius: 2em;
-        -o-border-radius: 2em;
+        font-size: calc(.6rem + 1vw);
     }
       
     .header__p {
@@ -54,43 +118,23 @@
     
     .image-banner {
         width: 40%;
-        display: flex;
-        justify-content: center;
-        img {
-            width: 100%;
-        }
     }
     
     .section-one__h2 {
-        width: 100%;
-        margin: 4rem 0;
         font-size: calc(2.4rem + 1vw);
         font-weight: 700;
     }
-
-    .section-two {
-        margin: 4em 0;
-    }
     
     .pictures {
-        display: flex;
-        justify-content: center;
+        flex-direction: row;
         column-gap: 15rem;
-        width: 100%;
     }
     
     .pic {
         width: 8%;
-        img {
-            width: 100%;
-        }
     }
-    
+
     figcaption {
-        text-align: center;
         font-size: calc(1rem + .2vw);
-        font-weight: 600;
-        padding: 2rem 0;
-        color: var(--blush);
     }
 }

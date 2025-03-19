@@ -25,7 +25,8 @@ function Footer() {
         </div>
       </div>
       <div className="info-app">
-        <strong className='footer__span'>&copy; 2025 Hinspire Inc. All rights reserved. Developed with ❤ by <a href="https://github.com/Monica-R">Mónica-R</a></strong>
+        <strong className='footer__span'>&copy; 2025 Hinspire Inc. All rights reserved. </strong>
+        <strong>Developed with ❤ by <a href="https://github.com/Monica-R">Mónica-R</a></strong>
       </div>
     </footer>
   )
