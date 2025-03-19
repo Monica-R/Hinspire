@@ -1,0 +1,33 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 1em;
+}
+
+.page-number,
+.current-page {
+    font-size: 1.2rem;
+    color: var(--blush);
+}
+
+.page-number {
+    background-color: unset;
+    font-weight: 500;
+}
+
+.current-page {
+    background-color: var(--khaki);
+    font-weight: 500;
+}
+
+.page-button {
+    background-color: unset;
+    outline: 2px solid var(--blush);
+    color: var(--blush);
+}
+
+.page-button:hover {
+    background-color: var(--blush);
+    color: var(--color-white);
+    transition: all 500ms;
+}
