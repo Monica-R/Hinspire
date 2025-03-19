@@ -87,6 +87,10 @@ textarea {
     font-size: calc(1.6rem + .2vw);
 }
 
+.empty {
+    display: none;
+}
+
 .fragment-author {
     display: block;
     color: var(--blush);
