@@ -17,7 +17,7 @@ function AIAnalysisChatBox() {
   }
 
   return (
-    <div>{ handleButton } </div>
+    <div><button onClick={() => handleButton }>GEMINI</button> </div>
   )
 }
 
