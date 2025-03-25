@@ -7,6 +7,7 @@ import { fetchStoryById } from '../../services/stories';
 import { getUserVotes, addVote, removeVote } from '../../services/votes';
 import { useAuth } from '../../context/auth.context';
 import Pagination from '../../components/Pagination/Pagination';
+import AIChatToggle from '../../components/AIChatToggle/AIChatToggle';
 
 function StoryDetailsView() {
     const { authToken, user } = useAuth();
@@ -157,11 +158,14 @@ function StoryDetailsView() {
                 authToken &&
                 story.status !== 'completed' &&
                 pendingFragments.length < 3 &&
-                <form className='fragment-form' onSubmit={handleSubmit}>
-                    <h2 className='fragment__h2'>Add fragment</h2>
-                    <textarea name="content" cols="50" rows="10" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
-                    <button className='add-button' type='submit'>Add fragment</button>
-                </form>
+                <>
+                    <form className='fragment-form' onSubmit={handleSubmit}>
+                        <h2 className='fragment__h2'>Add fragment</h2>
+                        <textarea name="content" cols="50" rows="10" value={content} id="content" placeholder='Tell me what happens next' onChange={(e) => setContent(e.target.value)}></textarea>
+                        <button className='add-button' type='submit'>Add fragment</button>
+                    </form>
+                    <AIChatToggle />
+                </>
             }
             <article className={pendingFragments.length === 0 ? 'empty' : 'pending-fragments'}>                
                 <h3 className='fragments__h3'>We have fragments in process, vote for the one you like.</h3>

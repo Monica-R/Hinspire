@@ -1,0 +1,12 @@
+.ai-analysis-chatbox {
+    width: 80%;
+}
+.analysis-result {
+    width: 70%;
+}
+
+.text-analysis {
+    display: block;
+    width: 70%;
+    padding: 1rem;
+}
