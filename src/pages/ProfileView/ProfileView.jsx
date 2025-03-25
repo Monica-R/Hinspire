@@ -42,8 +42,10 @@ function ProfileView() {
   }, [getProfileUser]);  // Solo se ejecuta si `getProfileUser` cambia
   
   useEffect(() => {
-    getRecentStories();
-  }, [getRecentStories]);  // Solo se ejecuta si `getRecentStories` cambia
+    if (user) {
+      getRecentStories();
+    }
+  }, [user, getRecentStories]);  // Solo se ejecuta si `getRecentStories` cambia y si el usuario está conectado
 
   const getStoriesDesc = stories.sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
