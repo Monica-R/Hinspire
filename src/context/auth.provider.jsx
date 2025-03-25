@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
     const verifying = async (token) => {
       try {
         setIsLoading(true);
-        console.log("Verificando token en AuthProvider...");
         const authenticatedData = await verify(token);
         setUser(authenticatedData);
       } catch (error) {
