@@ -28,9 +28,12 @@ const AIAnalysisChatBox = () => {
       ) {
         extractedText = result.candidates[0].content.parts[0].text;
       }
-      console.log('objeto', result);
-      console.log('texto extraído:', extractedText);
-      setAnalysisResult(extractedText);
+      const cleanText = extractedText.replace(/\n+/g, " ")  // Elimina saltos de línea
+              .replace(/["']/g, "")  // Elimina comillas
+              .replace(/\\/g, "");   // Elimina barras invertidas
+
+      console.info('texto limpio', cleanText);
+      setAnalysisResult(cleanText);
     } catch (err) {
       console.error(err);
       setError('No se pudo analizar el tono. Inténtalo de nuevo.');
@@ -58,7 +61,7 @@ const AIAnalysisChatBox = () => {
       {analysisResult && (
         <div className="analysis-result">
           <h4>Resultado del análisis:</h4>
-          <pre className='text-analysis'>{JSON.stringify(analysisResult, null, 2)}</pre>
+          <p className='text-analysis'>{JSON.stringify(analysisResult, null, 2)}</p>
         </div>
       )}
     </div>
