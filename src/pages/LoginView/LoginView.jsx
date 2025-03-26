@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/auth.context';
 import { login } from '../../services/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,17 +7,17 @@ import './LoginView.css';
 
 function LoginView() {
 
-  const { setAuthToken, /*user,*/ isLoading, startLoading, stopLoading } = useAuth();
+  const { setAuthToken, user, isLoading, startLoading, stopLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   // Redirigir después de login según qué tipo de usuario es
-  // useEffect(() => {
-  //   if (user) {
-  //     navigate(user.role === "admin" ? "/admin" : "/profile");
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (user) {
+      navigate(user.role === "admin" ? "/admin" : "/profile");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (event) => {
     try {
@@ -28,7 +28,6 @@ function LoginView() {
 
       if (data && data.authToken) {
         setAuthToken(data.authToken);
-        navigate("/profile");
       } else {
         console.error("Login failed", data);
       }
