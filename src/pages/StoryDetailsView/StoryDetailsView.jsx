@@ -138,7 +138,7 @@ function StoryDetailsView() {
     };
 
     if (!story) {
-        return <p>Loading...</p>
+        return <div className="loading-story">Loading...</div>
     }
     return (
         <section className='story-section'>

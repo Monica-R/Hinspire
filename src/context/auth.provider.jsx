@@ -1,5 +1,3 @@
-// Definimos el estado y lo proveemos
-
 import { useEffect, useState } from "react";
 import { AuthContext } from "./auth.context";
 import { verify } from '../services/auth';
@@ -39,8 +37,8 @@ export const AuthProvider = ({ children }) => {
   }, [authToken]);
 
   const logout = () => {
-    setUser(null);
     setAuthToken(null);
+    setUser(null);
     localStorage.removeItem("authToken");
   }
 

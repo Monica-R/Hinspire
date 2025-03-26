@@ -12,11 +12,11 @@ function MyStoriesView() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [stories, setStories] = useState([]);
-  const { authToken, user, isLoading, startLoading, stopLoading } = useAuth();
+  const { authToken, user } = useAuth();
 
   // para la paginación
-    const [currentPage, setCurrentPage] = useState(1);
-    const storiesPerPage = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+  const storiesPerPage = 5;
 
   const getStories = useCallback(async () => {
     try {
@@ -35,7 +35,6 @@ function MyStoriesView() {
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      startLoading();
       await addStory(title, description, authToken);
       // Vacías los estados una vez añadida la historia
       setTitle("");
@@ -43,8 +42,6 @@ function MyStoriesView() {
       getStories();
     } catch (error) {
       console.error(error);
-    } finally {
-      stopLoading();
     }
   };
 
@@ -55,27 +52,19 @@ function MyStoriesView() {
     const totalPages = Math.ceil(stories.length / storiesPerPage);
 
   return (
-    <section className='story-list'>
-      { isLoading ? (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-          <ClipLoader color="#da667b" size={100}/>
-        </div>      
-      ) : (
-        <>
-          <form className='story-form' onSubmit={handleSubmit}>
-            <h2 className='story-form__h2'>Create story</h2>
-            <label htmlFor="title"></label>
-            <input className='input-title' type="text" value={title} id="title" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
-            <label htmlFor="description"></label>
-            <textarea id="description" rows="10" value={description} name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
-            <button className='story-button' type="submit">Create story</button>
-          </form>
-          <StoryList stories={selectedStories} getStories={getStories}/>
-          { totalPages > 1 &&
-            (<Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage}/>)
-          }
-        </>
-      )}
+    <section className='story-list'>       
+      <form className='story-form' onSubmit={handleSubmit}>
+        <h2 className='story-form__h2'>Create story</h2>
+        <label htmlFor="title"></label>
+        <input className='input-title' type="text" value={title} id="title" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
+        <label htmlFor="description"></label>
+        <textarea id="description" rows="10" value={description} name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
+        <button className='story-button' type="submit">Create story</button>
+      </form>
+      <StoryList stories={selectedStories} getStories={getStories}/>
+      { totalPages > 1 &&
+        (<Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage}/>)
+      }      
     </section>
   )
 }
