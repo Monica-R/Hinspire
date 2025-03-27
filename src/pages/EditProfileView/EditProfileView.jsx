@@ -77,7 +77,7 @@ function EditProfileView() {
           {/* Modal de confirmación para eliminar la cuenta */}
           {showDeleteModal && (
             <div className="modal-overlay">
-              <div className="modal-content">
+              <div className="modal-content-danger">
                 <h3>Confirm Account Deletion</h3>
                 <p>Are you sure you want to delete your account? This action cannot be undone.</p>
                 <div className="modal-buttons">

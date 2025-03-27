@@ -7,7 +7,7 @@
 }
 
 .edit-form {
-    width: 40%;
+    width: 100%;
     height: 60vh;
     display: flex;
     flex-direction: column;
@@ -15,4 +15,127 @@
     justify-content: center;
     padding: 2em;
     background-color: var(--color-white);
+}
+
+.edit-form label,
+.edit-form input {
+    width: 100%;
+}
+
+.edit-form label{
+    margin-bottom: .5rem;
+}
+
+.edit-form input {
+    margin-bottom: 1rem;
+}
+
+.edit-form button {
+    width: 100%;
+    padding: .5rem;
+    color: var(--blush);
+    outline: 2px solid var(--blush);
+    cursor: pointer;
+    background-color: transparent;
+    font-size: calc(1rem + .2vw);
+    margin-top: 1rem;
+    border-radius: .2rem;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    -ms-border-radius: .2rem;
+    -o-border-radius: .2rem;
+}
+
+.edit-form button:hover {
+    background-color: var(--blush);
+    color: var(--color-white);
+    transition: all 500ms;
+    -webkit-transition: all 500;
+    -moz-transition: all 500;
+    -ms-transition: all 500;
+    -o-transition: all 500;
+}
+
+.danger-zone {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    h3 {
+        color: var(--blush);
+        font-size: calc(2rem + .2vw);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+}
+
+.delete-acc {
+    width: 100%;
+    padding: .5rem;
+    color: #580f7a;
+    outline: 2px solid #580f7a;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: calc(1rem + .2vw);
+    border-radius: .2rem;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    -ms-border-radius: .2rem;
+    -o-border-radius: .2rem;
+}
+
+.delete-acc:hover {
+    background-color: #580f7a;
+    color: var(--color-white);
+    transition: all 500ms;
+    -webkit-transition: all 500;
+    -moz-transition: all 500;
+    -ms-transition: all 500;
+    -o-transition: all 500;
+}
+
+.back-to {
+    margin-top: 1rem;
+}
+
+.back-to a{
+    color: var(--bistre);
+    font-size: calc(1rem + .2vw);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    margin: .5rem 0;
+}
+
+.modal-content-danger {
+    padding: 2em;
+    background-color: var(--color-white);
+    border-radius: .2rem;
+    -webkit-border-radius: .2rem;
+    -moz-border-radius: .2rem;
+    -ms-border-radius: .2rem;
+    -o-border-radius: .2rem;
+    h3 {
+        font-size: calc(2rem + .2vw);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+}
+
+.modal-buttons button:first-child {
+    background-color: #919191;
+}
+
+@media (width >= 1024px) {
+
+    .edit-form {
+        width: 40%;
+    }
+
+    .edit-form button,
+    .delete-acc {
+        width: 40%;
+    }
+
+    .danger-zone {
+        width: 40%;
+    }
 }
