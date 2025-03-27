@@ -192,10 +192,10 @@ function StoryDetailsView() {
                                 </div>
                                 {/* Si el usuario es el autor del fragmento, puede editar/eliminar */}
                                 {user && fragment.author && (user._id === fragment.author._id) && (
-                                    <>
-                                        <button onClick={() => handleEditFragment(fragment._id)}>Edit</button>
-                                        <button onClick={() => handleDeleteFragment(fragment._id)}>Delete</button>
-                                    </>
+                                    <div className='fragment-options'>
+                                        <button onClick={() => handleEditFragment(fragment._id)}><ion-icon name="pencil"></ion-icon> Edit</button>
+                                        <button onClick={() => handleDeleteFragment(fragment._id)}><ion-icon name="trash"></ion-icon> Delete</button>
+                                    </div>
                                 )}
                                 {/* Si el usuario es el autor de la historia, puede aceptar fragmentos */}
                                 {user && story.author && (user._id === story.author._id) && (

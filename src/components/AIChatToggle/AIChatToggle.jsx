@@ -13,7 +13,7 @@ const AIChatToggle = () => {
   return (
     <div className="ai-chat-toggle">
       <button onClick={toggleChat} className="toggle-button">
-        {isVisible ? 'Ocultar análisis IA' : 'Mostrar análisis IA'}
+        {isVisible ? <span className="close-ia"><ion-icon name="color-wand"></ion-icon></span> : <ion-icon name="color-wand"></ion-icon>}
       </button>
       {isVisible && <AIAnalysisChatBox />}
     </div>
