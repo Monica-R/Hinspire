@@ -1,8 +1,9 @@
 // AIAnalysisChatBox.jsx
 import React, { useState } from 'react';
+import { marked } from 'marked';
 import { fetchAnalyzeEmotion } from '../../services/gemini';
-import './AIAnalysisChatBox.css';
 import { useAuth } from '../../context/auth.context';
+import './AIAnalysisChatBox.css';
 
 const AIAnalysisChatBox = () => {
   const [inputText, setInputText] = useState('');
@@ -28,12 +29,7 @@ const AIAnalysisChatBox = () => {
       ) {
         extractedText = result.candidates[0].content.parts[0].text;
       }
-      const cleanText = extractedText.replace(/\n+/g, " ")  // Elimina saltos de línea
-              .replace(/["']/g, "")  // Elimina comillas
-              .replace(/\\/g, "");   // Elimina barras invertidas
-
-      console.info('texto limpio', cleanText);
-      setAnalysisResult(cleanText);
+      setAnalysisResult(extractedText);
     } catch (err) {
       console.error(err);
       setError('No se pudo analizar el tono. Inténtalo de nuevo.');
@@ -44,8 +40,10 @@ const AIAnalysisChatBox = () => {
 
   return (
     <div className="ai-analysis-chatbox">
-      <textarea 
-        placeholder="Escribe tu fragmento aquí..."
+      <textarea
+        cols={30}
+        rows={10}
+        placeholder="Write your excerpt here..."
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
         className="ai-textarea"
@@ -55,13 +53,16 @@ const AIAnalysisChatBox = () => {
         disabled={isLoading || !inputText.trim()}
         className="ai-analyze-button"
       >
-        {isLoading ? 'Analizando...' : 'Analizar tono'}
+        {isLoading ? 'Testing...' : 'Testing tone'}
       </button>
       {error && <p className="error-message">{error}</p>}
       {analysisResult && (
         <div className="analysis-result">
-          <h4>Resultado del análisis:</h4>
-          <p className='text-analysis'>{JSON.stringify(analysisResult, null, 2)}</p>
+          <h4 className='analysis-result__h4'>Completed analysis result:</h4>
+          <div 
+            className='text-analysis' 
+            dangerouslySetInnerHTML={{ __html: marked(analysisResult) }}
+          />
         </div>
       )}
     </div>
