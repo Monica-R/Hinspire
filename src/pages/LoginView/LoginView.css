@@ -54,7 +54,7 @@
 
     .login-form input,
     .login-form label {
-        width: 80%;
+        width: 80% !important;
     }
 
     .login-button {

@@ -51,12 +51,15 @@ function SignupView() {
             <form onSubmit={handleSubmit} className="signup-form">
               <h2 className='signup__h2'>Sign up</h2>
               <label htmlFor="username">
+                Username
               </label>
                 <input id="username" type="text" placeholder='Your name' required onChange={(e) => setUsername(e.target.value)}/>
               <label htmlFor="email">
+                Email
               </label>
                 <input id="email" type="email" placeholder='Your email' required onChange={(e) => setEmail(e.target.value)}/>
               <label htmlFor="pass">
+                Password
               </label>
                 <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
               <input id="submit-button" className='signup-button' type="submit" value="Send" />
