@@ -19,6 +19,10 @@ function Navbar() {
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
       {authToken && user ? (
           <>
+            <button className="menu-toggle toggle-close" onClick={() => setMenuOpen(false)}>
+              CERRAR
+              <ion-icon name="close"></ion-icon>
+            </button>
             <Link className="link" to="/" onClick={() => setMenuOpen(false)}>Home</Link>
             <Link className="link" to="/stories" onClick={() => setMenuOpen(false)}>Stories</Link>
             <Link className="link" to="#" onClick={() => setMenuOpen(false)}>About</Link>
@@ -27,6 +31,9 @@ function Navbar() {
           </>
         ) : (
           <>
+            <button className="menu-toggle toggle-close" onClick={() => setMenuOpen(false)}>
+              <ion-icon name="close"></ion-icon>
+            </button>
             <Link className="link" to="/" onClick={() => setMenuOpen(false)}>Home</Link>
             <Link className="link" to="/stories" onClick={() => setMenuOpen(false)}>Stories</Link>
             <Link className="link" to="#" onClick={() => setMenuOpen(false)}>About</Link>
