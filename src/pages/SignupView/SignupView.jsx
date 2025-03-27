@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { signup } from '../../services/auth';
 import { useAuth,  } from '../../context/auth.context';
 import './SignupView.css';
@@ -26,6 +27,8 @@ function SignupView() {
       startLoading();
       // Llamamos a la función signup del servicio
       const data = await signup({ email, password, username });
+      toast.success("Signup successful!");
+      // Si el usuario se ha registrado correctamente, guardamos el token en el contexto
 
       if (data && data.authToken) {
         setAuthToken(data.authToken);
@@ -34,6 +37,8 @@ function SignupView() {
       }
     } catch (error) {
       console.error(error);
+      const errorMessage = error.data?.message || "Server error, please try again.";
+      toast.error(errorMessage);
     } finally {
       stopLoading();
     }
@@ -51,12 +56,15 @@ function SignupView() {
             <form onSubmit={handleSubmit} className="signup-form">
               <h2 className='signup__h2'>Sign up</h2>
               <label htmlFor="username">
+                Username
               </label>
                 <input id="username" type="text" placeholder='Your name' required onChange={(e) => setUsername(e.target.value)}/>
               <label htmlFor="email">
+                Email
               </label>
                 <input id="email" type="email" placeholder='Your email' required onChange={(e) => setEmail(e.target.value)}/>
               <label htmlFor="pass">
+                Password
               </label>
                 <input id="pass" type="password" placeholder='Your password' required onChange={(e) => setPassword(e.target.value)}/>
               <input id="submit-button" className='signup-button' type="submit" value="Send" />

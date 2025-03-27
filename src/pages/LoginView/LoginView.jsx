@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/auth.context';
 import { login } from '../../services/auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import './LoginView.css';
 
 function LoginView() {
@@ -25,6 +26,7 @@ function LoginView() {
       startLoading();
       // Llamamos a la función login del servicio
       const data = await login({ email, password });
+      toast.success("Welcome back!");
 
       if (data && data.authToken) {
         setAuthToken(data.authToken);
@@ -32,7 +34,9 @@ function LoginView() {
         console.error("Login failed", data);
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      const errorMessage = error.data?.message || "Server error, please try again.";
+      toast.error(errorMessage);
     }  finally {
       stopLoading();
     }  

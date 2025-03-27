@@ -1,4 +1,22 @@
 .ai-chat-toggle  {
     width: 50%;
-    background-color: #555841;
+    transition: 500ms;
+    -webkit-transition: 500ms;
+    -moz-transition: 500ms;
+    -ms-transition: 500ms;
+    -o-transition: 500ms;
+}
+
+.toggle-button, .close-ia {
+    margin-top: 1rem;
+    font-size: calc(2rem - .5vw);
+}
+
+.toggle-button {
+    background-color: var(--bistre);
+    color: var(--blush);
+}
+
+.close-ia {
+    color: var(--color-white);
 }

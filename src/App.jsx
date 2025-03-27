@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/auth.provider'
 import LoginView from './pages/LoginView/LoginView'
 import SignupView from './pages/SignupView/SignupView'
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <>
+      <Toaster position='top-right' />
       <AuthProvider>
         <BrowserRouter>
           <Routes>

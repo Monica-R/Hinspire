@@ -1,0 +1,21 @@
+.fragment-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10vh;
+    border-bottom: 1px solid #da667b5d;
+    margin-bottom: 1rem;
+}
+
+.fragment-date {
+    font-size: calc(1rem - .2vw);
+    font-weight: 600;
+    color: #a1a1a1;
+}
+
+.fragment-item-author {
+    color: var(--blush);
+    font-size: calc(2rem - .7vw);
+    font-weight: 600;
+    margin-bottom: .5em;
+}

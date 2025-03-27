@@ -17,13 +17,18 @@
     cursor: pointer;
     display: block; /* Visible en móviles */
   }
+
+  .toggle-close {
+    color: var(--color-white);
+    font-size: 2rem;
+  }
   
   /* Menú cerrado en móviles */
   .nav-links {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 0;
     left: 0;
     width: 100%;
     background: #222;
@@ -103,6 +108,7 @@
 }
 
 .logout {
-    background-color: var(--khaki);
-    color: var(--bistre);
+  padding: .5rem;
+  background-color: var(--khaki);
+  color: var(--bistre);
 }

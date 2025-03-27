@@ -52,7 +52,7 @@
 
 .modal-buttons {
     display: flex;
-    margin: 1em; 
+    margin: 1em 0; 
     column-gap: 1.2em;
 }
 

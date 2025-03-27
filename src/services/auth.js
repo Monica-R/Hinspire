@@ -6,7 +6,7 @@ export const signup = async (user) => {
     return response.data;
   } catch (error) {
     console.error("Houston, we have a problem.", error);
-    throw new Error(error);
+    throw error.response ? error.response : new Error ("server error");
   }
 }
 
@@ -16,7 +16,7 @@ export const login = async (user) => {
     return response.data;
   } catch (error) {
     console.error("Houston, we have a problem.", error);
-    throw new Error(error);
+    throw error.response ? error.response : new Error ("server error");
   }
 }
 
@@ -28,6 +28,6 @@ export const verify = async (token) => {
     return response.data;
   } catch (error) {
     console.error("Houston, we have a problem.", error);
-    throw new Error(error);
+    throw error.response ? error.response : new Error ("server error");
   }
 }

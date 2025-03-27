@@ -13,6 +13,7 @@ form {
 input[type="text"],
 input[type="email"],
 input[type="password"] {
+    width: 90%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -49,7 +50,7 @@ button {
 }
 
 .signup-form {
-    width: 40%;
+    width: 80%;
     height: 60vh;
     display: flex;
     flex-direction: column;
@@ -61,8 +62,29 @@ button {
 }
 
 .signup-button {
-    width: 20%;
+    width: 80%;
     padding: .5rem;
     font-size: calc(1rem + .1vw);
     margin-top: 1em;
+}
+
+@media (width >= 1024px) {
+    .signup-form {
+        width: 40%;
+    }
+
+    .signup-form label {
+        display: block;
+        width: 70%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"]{
+        width: 70%;
+    }
+
+    .signup-button {
+        width: 40%;
+    }
 }
