@@ -103,6 +103,7 @@
 }
 
 .logout {
-    background-color: var(--khaki);
-    color: var(--bistre);
+  padding: .5rem;
+  background-color: var(--khaki);
+  color: var(--bistre);
 }
