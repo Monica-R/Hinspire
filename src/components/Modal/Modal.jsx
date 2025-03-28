@@ -85,6 +85,8 @@ function Modal({ story, token, onDelete, onUpdate, onConfirm, children }) {
                 <div className="form-group">
                   <label htmlFor="description">Contenido:</label>
                   <textarea
+                    cols={30}
+                    rows={10}
                     id="description"
                     name="description"
                     value={formData.description}

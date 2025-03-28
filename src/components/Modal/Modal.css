@@ -24,14 +24,14 @@
     font-size: calc(1.4rem + .4vw);
     background-color: transparent;
     position: absolute;
-    top: 42%;
+    top: 22%;
     left: 66%;
     color: var(--bistre);
 }
 
 .delete-confirmation,
 .form-upd {
-    width: 40%;
+    width: 60%;
     height: 10rem;
     background-color: var(--color-white);
     border-radius: .2em;
@@ -57,10 +57,29 @@
 }
 
 .form-upd {
-    height: calc(15em - 2vh);
+    width: 50%;
+    min-height: calc(30em + 2vh);
+    h3 {
+        color: var(--reseda-green);
+        padding: 1em 0;
+        font-size: calc(1.4rem + .4vw);
+        font-weight: 500;
+    }
+}
+
+.form-group {
+    width: 80%;
+}
+
+.form-group label,
+.form-group input{
+    display: block;
+    width: 100%;
+    margin: .2em 0;
 }
 
 .form-group textarea {
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: .2em;
 }
